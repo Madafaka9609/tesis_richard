@@ -12,3 +12,5 @@ router.post(
   ],
   HorarioController.generar_horario
 );
+
+module.exports = router;

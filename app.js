@@ -16,9 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //ROUTES:
-app.get("/", (req, res) => {
-  res.status(200).json({ msg: "Hello World!" });
-});
+app.use("/api", require("./routes/horario.routes"));
 
 //SERVER RUNING:
 app.listen(process?.env.SERVER_PORT || 3000, () => {
