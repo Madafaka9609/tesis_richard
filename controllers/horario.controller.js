@@ -1,23 +1,22 @@
-const connection = require("../config/db.config");
+const pool_querys = require("../config/db.config");
 const { validationResult } = require("express-validator");
 
 const HorarioController = {
   get: async (req, res) => {},
-  generar_horario: (req, res) => {
-    const errors = validationResult(req);
+  get_locales: async (req, res, next) => {
+    /* const errors = validationResult(req);
     if (!errors.isEmpty())
       return res.status(401).json({ error: errors.array() });
 
-    const exist = connection.query(
-      `SELECT * FROM asignaciones WHERE semana=${req.body.semana}`,
-      (err, resul) => {
-        if (err) throw err;
+    const { semana, anno } = req.body; */
+    try {
+      const exist = await pool_querys.generar_horario();
 
-        return resul;
-      }
-    );
-
-    console.log(exist);
+      res.json(exist);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("HUbo un error");
+    }
   },
 };
 
