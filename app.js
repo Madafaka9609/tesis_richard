@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
+const db_connect = require("./config/db");
 require("dotenv").config({ path: ".development.env" });
 
 //SERVER CREATION:
