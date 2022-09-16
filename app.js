@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
-const db_connect = require("./config/db");
+const bodyParser = require("body-parser");
 require("dotenv").config({ path: ".development.env" });
 
 //SERVER CREATION:
@@ -12,6 +12,8 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 app.use(morgan("common"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //ROUTES:
 app.get("/", (req, res) => {
