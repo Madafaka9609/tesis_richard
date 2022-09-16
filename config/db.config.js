@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   host: process.env.MYSQL_DB,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  database: "stefac1",
+  database: process.env.MYSQL_SCHEMA,
   debug: false,
 });
 
@@ -22,4 +22,4 @@ const pool_querys = {
   },
 };
 
-module.exports = pool_querys;
+module.exports = pool;
