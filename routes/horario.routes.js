@@ -5,12 +5,12 @@ const HorarioController = require("../controllers/horario.controller");
 
 router.post(
   "/horario/",
-  /* [
-    check("seccion", "La seccion es obligatoria").not().isEmpty(),
+  [
+    //check("seccion", "La seccion es obligatoria").not().isEmpty(),
     check("anno", "El año es obligatorio").not().isEmpty(),
     check("semana", "La semana es obligatoria").not().isEmpty(),
-  ], */
-  HorarioController.get_locales
+  ],
+  HorarioController.generar_horario
 );
 
 module.exports = router;
