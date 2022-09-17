@@ -8,8 +8,9 @@ const HorarioController = {
     if (!errors.isEmpty())
       return res.status(401).json({ error: errors.array() });
 
-    const { semana, anno } = req.body;
-    try {
+      try {
+        
+      const { semana, anno } = req.body;
       await pool.getConnection((err, conn) => {
         if (err) throw err;
 
