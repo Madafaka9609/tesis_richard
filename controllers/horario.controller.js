@@ -1,6 +1,7 @@
 const pool = require("../config/db.config");
 const { validationResult } = require("express-validator");
 const generar = require("../modules/generar.module");
+const Helpers = require("../helpers/functions.helpers");
 
 const HorarioController = {
   generar_horario: async (req, res) => {
@@ -10,24 +11,22 @@ const HorarioController = {
 
     try {
       const { semana, anno, seccion } = req.body;
+
       await pool.getConnection(async (err, conn) => {
         if (err) {
           res.status(400).send("Conección inaccesible con la BD");
           throw err;
         }
 
-        const exist = conn.query(
-          `SELECT * FROM asignaciones WHERE anno=${anno} AND semana=${semana}`,
-          (err, resp) => {
-            if (err) throw err;
-
-            return resp;
-          }
+        await generar(
+          conn,
+          res,
+          Number(anno),
+          Number(semana),
+          Number(seccion)
+        ).then(() =>
+          res.status(200).json({ msg: "Horario generado con éxito " })
         );
-
-        if (exist.values === undefined) {
-          await generar(conn, res, anno, semana, seccion);
-        }
 
         conn.release();
       });
